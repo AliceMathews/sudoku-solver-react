@@ -1,6 +1,6 @@
 .container {
-  height: 612px;
-  width: 612px;
+  height: 615px;
+  width: 615px;
   background-color: teal;
   border-style: solid;
   border-width: 10px;
@@ -11,8 +11,17 @@
 }
 
 .box {
-  height: 200px;
-  width: 200px;
+  height: 201px;
+  width: 201px;
   border-style: solid;
   border-width: 2px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  height: 65px;
+  width: 65px;
+  border-style: solid;
+  border-width: 1px;
 }
