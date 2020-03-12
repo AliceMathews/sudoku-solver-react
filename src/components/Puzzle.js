@@ -17,7 +17,17 @@ export default function Puzzle() {
   ]);
 
   const updateGame = function(row, column, value) {
-    // setGameState(prevGameState => [...gameState, ])
+    const updatedState = gameState.map((subarray, i) => {
+      return subarray.map((el, j) => {
+        if (i === row && j === column) {
+          return Number(value);
+        } else {
+          return el;
+        }
+      });
+    });
+
+    setGameState(updatedState);
   };
 
   return (
