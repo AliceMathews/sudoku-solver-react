@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "./Puzzle.css";
 import Box from "./Box";
 
+import solver from "../helpers/solver";
+
 export default function Puzzle() {
   const [gameState, setGameState] = useState([
     ["", "", "", "", 1, 8, "", "", ""],
@@ -31,16 +33,21 @@ export default function Puzzle() {
   };
 
   return (
-    <div className="container">
-      <Box id={[0, 0]} values={gameState} addValue={updateGame} />
-      <Box id={[0, 1]} values={gameState} addValue={updateGame} />
-      <Box id={[0, 2]} values={gameState} addValue={updateGame} />
-      <Box id={[1, 0]} values={gameState} addValue={updateGame} />
-      <Box id={[1, 1]} values={gameState} addValue={updateGame} />
-      <Box id={[1, 2]} values={gameState} addValue={updateGame} />
-      <Box id={[2, 0]} values={gameState} addValue={updateGame} />
-      <Box id={[2, 1]} values={gameState} addValue={updateGame} />
-      <Box id={[2, 2]} values={gameState} addValue={updateGame} />
-    </div>
+    <>
+      <div className="container">
+        <Box id={[0, 0]} values={gameState} addValue={updateGame} />
+        <Box id={[0, 1]} values={gameState} addValue={updateGame} />
+        <Box id={[0, 2]} values={gameState} addValue={updateGame} />
+        <Box id={[1, 0]} values={gameState} addValue={updateGame} />
+        <Box id={[1, 1]} values={gameState} addValue={updateGame} />
+        <Box id={[1, 2]} values={gameState} addValue={updateGame} />
+        <Box id={[2, 0]} values={gameState} addValue={updateGame} />
+        <Box id={[2, 1]} values={gameState} addValue={updateGame} />
+        <Box id={[2, 2]} values={gameState} addValue={updateGame} />
+      </div>
+      <button className="solve-button" onClick={() => solver([...gameState])}>
+        Solve
+      </button>
+    </>
   );
 }
