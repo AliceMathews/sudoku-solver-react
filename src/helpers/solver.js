@@ -76,5 +76,9 @@ const find3rdVal = function(val, block, coords1, coords2) {
     }
   });
 
+  // const missingColBlock = Object.keys(blockLookup).find(key =>
+  //   blockLookup[key].includes(row)
+  // );
+
   console.log(missingRow);
 };
