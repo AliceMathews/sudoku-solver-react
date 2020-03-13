@@ -69,4 +69,12 @@ const find3rdVal = function(val, block, coords1, coords2) {
   console.log("coords1: ", coords1);
   console.log("coords2: ", coords2);
   console.log("block: ", block);
+
+  const missingRow = blockLookup[block].filter(el => {
+    if (!(el === coords1[0] || el === coords2[0])) {
+      return el;
+    }
+  });
+
+  console.log(missingRow);
 };
