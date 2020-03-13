@@ -1,3 +1,9 @@
+const blockLookup = {
+  1: [0, 1, 2],
+  2: [3, 4, 5],
+  3: [6, 7, 8]
+};
+
 export default function solver(gameState) {
   loopRows(gameState);
 }
@@ -14,6 +20,10 @@ const loopRows = function(gameState) {
 
 const checkRows = function(row, col, val, gameState) {
   let rowArr = [];
+  let block = Object.keys(blockLookup).find(key =>
+    blockLookup[key].includes(row)
+  );
+
   if (row < 3) {
     rowArr = gameState.slice(0, 3);
   } else if (row < 6) {
@@ -47,5 +57,16 @@ const checkRows = function(row, col, val, gameState) {
       matchCol = rowArr[2].findIndex(el => el === val);
       console.log(matchRow, matchCol);
     }
+
+    if (matchCol > 0) {
+      find3rdVal(val, block, [row, col], [matchRow, matchCol]);
+    }
   }
+};
+
+const find3rdVal = function(val, block, coords1, coords2) {
+  console.log("val: ", val);
+  console.log("coords1: ", coords1);
+  console.log("coords2: ", coords2);
+  console.log("block: ", block);
 };
