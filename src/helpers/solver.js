@@ -5,7 +5,21 @@ const blockLookup = {
 };
 
 export default function solver(gameState, updateGame) {
-  loopRows(gameState, updateGame);
+  let rowUpdated = false;
+  rowUpdated = loopRows(gameState, updateGame);
+  // while (rowUpdated) {
+  //   rowUpdated = loopRows(gameState, updateGame);
+  // }
+  if (rowUpdated) {
+    console.log("running again");
+    rowUpdated = loopRows(gameState, updateGame);
+  }
+
+  if (rowUpdated) {
+    console.log("running again");
+    rowUpdated = loopRows(gameState, updateGame);
+  }
+  console.log("clear");
 }
 
 const loopRows = function(gameState, updateGame) {
@@ -15,11 +29,11 @@ const loopRows = function(gameState, updateGame) {
       if (val !== "") {
         rowUpdated =
           checkRows(row, col, val, gameState, updateGame) || rowUpdated; //if rowupdated is ever true it maintains this value
-        console.log("row updated: ", rowUpdated);
       }
     }
   }
   console.log("row updated: ", rowUpdated);
+  return rowUpdated;
 };
 
 const checkRows = function(row, col, val, gameState, updateGame) {
