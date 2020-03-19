@@ -45,7 +45,10 @@ export default function Puzzle() {
         <Box id={[2, 1]} values={gameState} addValue={updateGame} />
         <Box id={[2, 2]} values={gameState} addValue={updateGame} />
       </div>
-      <button className="solve-button" onClick={() => solver(gameState)}>
+      <button
+        className="solve-button"
+        onClick={() => solver(gameState, updateGame)}
+      >
         Solve
       </button>
     </>
