@@ -9,13 +9,17 @@ export default function solver(gameState, updateGame) {
 }
 
 const loopRows = function(gameState, updateGame) {
+  let rowUpdated = false;
   for (let [row, arr] of gameState.entries()) {
     for (let [col, val] of arr.entries()) {
       if (val !== "") {
-        checkRows(row, col, val, gameState, updateGame);
+        rowUpdated =
+          checkRows(row, col, val, gameState, updateGame) || rowUpdated; //if rowupdated is ever true it maintains this value
+        console.log("row updated: ", rowUpdated);
       }
     }
   }
+  console.log("row updated: ", rowUpdated);
 };
 
 const checkRows = function(row, col, val, gameState, updateGame) {
@@ -56,7 +60,7 @@ const checkRows = function(row, col, val, gameState, updateGame) {
     }
 
     if (matchCol > 0) {
-      find3rdVal(
+      return find3rdVal(
         val,
         block,
         [row, col],
@@ -109,6 +113,7 @@ const find3rdVal = function(
       }
     }
     if (valFound === 0) return String(col); //convert to string to deal with bug where if col is 0, you get an empty array
+    return undefined;
   });
   console.log("pot cols 3", potentialCols);
 
@@ -117,6 +122,6 @@ const find3rdVal = function(
     console.log("missing col: ", missingCol);
     console.log("missing row: ", missingRow);
     updateGame(missingRow, missingCol, val);
-    console.log("game state: ", gameState);
+    return true; //updates the rowUpdated value
   }
 };
