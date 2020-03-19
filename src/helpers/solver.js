@@ -110,6 +110,16 @@ const find3rdVal = function(
     col => gameState[missingRow][col] === ""
   );
 
+  //filter out any cells that the cols already contain the val
+  potentialCols = potentialCols.filter(col => {
+    let valFound = 0;
+    for (let i = 0; i < 9; i++) {
+      if (gameState[i][col] === val) {
+        valFound = 1;
+      }
+    }
+    if (valFound === 0) return col;
+  });
   console.log("pot cols", potentialCols);
 
   if (potentialCols.length === 1) {
