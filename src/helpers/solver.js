@@ -74,11 +74,21 @@ const find3rdVal = function(val, block, coords1, coords2) {
     if (!(el === coords1[0] || el === coords2[0])) {
       return el;
     }
-  });
+  })[0];
 
-  // const missingColBlock = Object.keys(blockLookup).find(key =>
-  //   blockLookup[key].includes(row)
-  // );
+  const missingColBlock = Object.keys(blockLookup).find(
+    key =>
+      !blockLookup[key].includes(coords1[1]) &&
+      !blockLookup[key].includes(coords2[1])
+  );
 
-  console.log(missingRow);
+  // const missingCol = blockLookup[missingColBlock].filter(el => {
+  //   if (!(el === coords1[1] || el === coords2[1])) {
+  //     return el;
+  //   }
+  // })[0];
+
+  console.log("missing row: ", missingRow);
+  console.log("missing col block: ", missingColBlock);
+  // console.log("missing column: ", missingCol);
 };
