@@ -50,12 +50,9 @@ const checkRows = function(row, col, val, gameState, updateGame) {
         matchRow = row + 2;
         matchCol = rowArr[2].findIndex(el => el === val);
       }
-
-      console.log(matchRow, matchCol);
     } else if (row % 3 === 1 || row === 1) {
       matchRow = row + 1;
       matchCol = rowArr[2].findIndex(el => el === val);
-      console.log(matchRow, matchCol);
     }
 
     if (matchCol > 0) {
@@ -84,17 +81,9 @@ const find3rdVal = function(
   console.log("coords2: ", coords2);
   console.log("block: ", block);
 
-  // const missingRow = blockLookup[block].filter(el => {
-  //   if (!(el === coords1[0] || el === coords2[0])) {
-  //     return el;
-  //   }
-  // })[0];
-
   const missingRow = blockLookup[block].find(
     el => el !== coords1[0] && el !== coords2[0]
   );
-
-  console.log(missingRow);
 
   const missingColBlock = Object.keys(blockLookup).find(
     key =>
@@ -103,7 +92,6 @@ const find3rdVal = function(
   );
 
   let potentialCols = blockLookup[missingColBlock];
-  console.log(potentialCols);
 
   //filter out any cells that are already filled
   potentialCols = potentialCols.filter(
@@ -125,9 +113,8 @@ const find3rdVal = function(
   if (potentialCols.length === 1) {
     const missingCol = potentialCols[0];
     console.log("missing col: ", missingCol);
+    console.log("missing row: ", missingRow);
     updateGame(missingRow, missingCol, val);
+    console.log("game state: ", gameState);
   }
-
-  console.log("missing row: ", missingRow);
-  console.log("missing col block: ", missingColBlock);
 };

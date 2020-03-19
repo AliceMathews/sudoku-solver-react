@@ -19,6 +19,7 @@ export default function Puzzle() {
   ]);
 
   const updateGame = function(row, column, value) {
+    console.log("updating state");
     const updatedState = gameState.map((subarray, i) => {
       return subarray.map((el, j) => {
         if (i === row && j === column) {
@@ -28,8 +29,10 @@ export default function Puzzle() {
         }
       });
     });
+    console.log(updatedState);
 
     setGameState(updatedState);
+    console.log(gameState);
   };
 
   return (
