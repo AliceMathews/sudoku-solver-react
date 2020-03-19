@@ -4,21 +4,21 @@ const blockLookup = {
   3: [6, 7, 8]
 };
 
-export default function solver(gameState) {
-  loopRows(gameState);
+export default function solver(gameState, updateGame) {
+  loopRows(gameState, updateGame);
 }
 
-const loopRows = function(gameState) {
+const loopRows = function(gameState, updateGame) {
   for (let [row, arr] of gameState.entries()) {
     for (let [col, val] of arr.entries()) {
       if (val !== "") {
-        checkRows(row, col, val, gameState);
+        checkRows(row, col, val, gameState, updateGame);
       }
     }
   }
 };
 
-const checkRows = function(row, col, val, gameState) {
+const checkRows = function(row, col, val, gameState, updateGame) {
   let rowArr = [];
   let block = Object.keys(blockLookup).find(key =>
     blockLookup[key].includes(row)
@@ -59,12 +59,26 @@ const checkRows = function(row, col, val, gameState) {
     }
 
     if (matchCol > 0) {
-      find3rdVal(val, block, [row, col], [matchRow, matchCol]);
+      find3rdVal(
+        val,
+        block,
+        [row, col],
+        [matchRow, matchCol],
+        gameState,
+        updateGame
+      );
     }
   }
 };
 
-const find3rdVal = function(val, block, coords1, coords2) {
+const find3rdVal = function(
+  val,
+  block,
+  coords1,
+  coords2,
+  gameState,
+  updateGame
+) {
   console.log("val: ", val);
   console.log("coords1: ", coords1);
   console.log("coords2: ", coords2);
@@ -82,13 +96,19 @@ const find3rdVal = function(val, block, coords1, coords2) {
       !blockLookup[key].includes(coords2[1])
   );
 
-  // const missingCol = blockLookup[missingColBlock].filter(el => {
-  //   if (!(el === coords1[1] || el === coords2[1])) {
-  //     return el;
-  //   }
-  // })[0];
+  let potentialCols = blockLookup[missingColBlock];
+  potentialCols = potentialCols.filter(
+    col => gameState[missingRow][col] === ""
+  );
+
+  if (potentialCols.length === 1) {
+    const missingCol = potentialCols[0];
+    console.log("missing col: ", missingCol);
+    updateGame(missingRow, missingCol, val);
+  } else {
+    ///function call to do next checks
+  }
 
   console.log("missing row: ", missingRow);
   console.log("missing col block: ", missingColBlock);
-  // console.log("missing column: ", missingCol);
 };
