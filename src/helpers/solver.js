@@ -92,11 +92,13 @@ const find3rdVal = function(
   );
 
   let potentialCols = blockLookup[missingColBlock];
+  console.log("pot cols 1", potentialCols);
 
   //filter out any cells that are already filled
   potentialCols = potentialCols.filter(
     col => gameState[missingRow][col] === ""
   );
+  console.log("pot cols 2", potentialCols);
 
   //filter out any cells that the cols already contain the val
   potentialCols = potentialCols.filter(col => {
@@ -106,9 +108,9 @@ const find3rdVal = function(
         valFound = 1;
       }
     }
-    if (valFound === 0) return col;
+    if (valFound === 0) return String(col); //convert to string to deal with bug where if col is 0, you get an empty array
   });
-  console.log("pot cols", potentialCols);
+  console.log("pot cols 3", potentialCols);
 
   if (potentialCols.length === 1) {
     const missingCol = potentialCols[0];
