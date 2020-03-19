@@ -20,18 +20,30 @@ export default function Puzzle() {
 
   const updateGame = function(row, column, value) {
     console.log("updating state");
-    const updatedState = gameState.map((subarray, i) => {
-      return subarray.map((el, j) => {
-        if (i === row && j === column) {
-          return Number(value);
-        } else {
-          return el;
-        }
-      });
-    });
-    console.log(updatedState);
+    // const updatedState = gameState.map((subarray, i) => {
+    //   return subarray.map((el, j) => {
+    //     if (i === row && j === column) {
+    //       return Number(value);
+    //     } else {
+    //       return el;
+    //     }
+    //   });
+    // });
+    // console.log(updatedState);
 
-    setGameState(updatedState);
+    setGameState(prevGameState => {
+      const updatedGameState = prevGameState.map((subarray, i) => {
+        return subarray.map((el, j) => {
+          if (i === row && j === column) {
+            return Number(value);
+          } else {
+            return el;
+          }
+        });
+      });
+      return updatedGameState;
+    });
+
     console.log(gameState);
   };
 
