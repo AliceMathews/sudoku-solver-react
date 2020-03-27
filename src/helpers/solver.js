@@ -9,27 +9,16 @@ let game = [];
 export default function solver(gameState, updateGameState) {
   let rowUpdated = false;
   game = gameState;
-  console.log("GAME: ", game);
-  rowUpdated = loopRows();
 
+  rowUpdated = loopRows();
   while (rowUpdated) {
     rowUpdated = loopRows(gameState, updateGame);
   }
-  // if (rowUpdated) {
-  //   console.log("running again");
-  //   rowUpdated = loopRows();
-  // }
 
-  // if (rowUpdated) {
-  //   console.log("running again");
-  //   rowUpdated = loopRows();
-  // }
-  console.log("clear");
+  console.log("END OF SOLVER");
 }
 
 const updateGame = function(row, column, value) {
-  console.log("prevGame", game);
-
   const updatedGame = game.map((subarray, i) => {
     return subarray.map((el, j) => {
       if (i === row && j === column) {
@@ -40,7 +29,7 @@ const updateGame = function(row, column, value) {
     });
   });
   game = updatedGame;
-  console.log(game);
+  console.log("Updated game: ", game);
 };
 
 const loopRows = function() {
@@ -100,10 +89,10 @@ const checkRows = function(row, col, val) {
 };
 
 const find3rdVal = function(val, block, coords1, coords2) {
-  console.log("val: ", val);
-  console.log("coords1: ", coords1);
-  console.log("coords2: ", coords2);
-  console.log("block: ", block);
+  // console.log("val: ", val);
+  // console.log("coords1: ", coords1);
+  // console.log("coords2: ", coords2);
+  // console.log("block: ", block);
 
   const missingRow = blockLookup[block].find(
     el => el !== coords1[0] && el !== coords2[0]
@@ -116,11 +105,11 @@ const find3rdVal = function(val, block, coords1, coords2) {
   );
 
   let potentialCols = blockLookup[missingColBlock];
-  console.log("pot cols 1", potentialCols);
+  // console.log("pot cols 1", potentialCols);
 
   //filter out any cells that are already filled
   potentialCols = potentialCols.filter(col => game[missingRow][col] === "");
-  console.log("pot cols 2", potentialCols);
+  // console.log("pot cols 2", potentialCols);
 
   //filter out any cells that the cols already contain the val
   potentialCols = potentialCols.filter(col => {
@@ -133,12 +122,11 @@ const find3rdVal = function(val, block, coords1, coords2) {
     if (valFound === 0) return String(col); //convert to string to deal with bug where if col is 0, you get an empty array
     return undefined;
   });
-  console.log("pot cols 3", potentialCols);
+  // console.log("pot cols 3", potentialCols);
 
   if (potentialCols.length === 1) {
     const missingCol = potentialCols[0];
-    console.log("missing col: ", missingCol);
-    console.log("missing row: ", missingRow);
+
     updateGame(missingRow, missingCol, val);
     return true; //updates the rowUpdated value
   }
