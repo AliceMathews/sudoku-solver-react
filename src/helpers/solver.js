@@ -10,18 +10,19 @@ export default function solver(gameState, updateGameState) {
   let rowUpdated = false;
   game = gameState;
   console.log("GAME: ", game);
-  rowUpdated = loopRows(gameState, updateGame);
+  rowUpdated = loopRows();
+
   // while (rowUpdated) {
   //   rowUpdated = loopRows(gameState, updateGame);
   // }
   if (rowUpdated) {
     console.log("running again");
-    rowUpdated = loopRows(gameState, updateGame);
+    rowUpdated = loopRows();
   }
 
   if (rowUpdated) {
     console.log("running again");
-    rowUpdated = loopRows(gameState, updateGame);
+    rowUpdated = loopRows();
   }
   console.log("clear");
 }
@@ -42,13 +43,12 @@ const updateGame = function(row, column, value) {
   console.log(game);
 };
 
-const loopRows = function(gameState, updateGame) {
+const loopRows = function() {
   let rowUpdated = false;
-  for (let [row, arr] of gameState.entries()) {
+  for (let [row, arr] of game.entries()) {
     for (let [col, val] of arr.entries()) {
       if (val !== "") {
-        rowUpdated =
-          checkRows(row, col, val, gameState, updateGame) || rowUpdated; //if rowupdated is ever true it maintains this value
+        rowUpdated = checkRows(row, col, val) || rowUpdated; //if rowupdated is ever true it maintains this value
       }
     }
   }
@@ -56,18 +56,18 @@ const loopRows = function(gameState, updateGame) {
   return rowUpdated;
 };
 
-const checkRows = function(row, col, val, gameState, updateGame) {
+const checkRows = function(row, col, val) {
   let rowArr = [];
   let block = Object.keys(blockLookup).find(key =>
     blockLookup[key].includes(row)
   );
 
   if (row < 3) {
-    rowArr = gameState.slice(0, 3);
+    rowArr = game.slice(0, 3);
   } else if (row < 6) {
-    rowArr = gameState.slice(3, 6);
+    rowArr = game.slice(3, 6);
   } else {
-    rowArr = gameState.slice(6, 9);
+    rowArr = game.slice(6, 9);
   }
 
   const numOfOccurances = rowArr.reduce((total, currentVal) => {
@@ -94,26 +94,12 @@ const checkRows = function(row, col, val, gameState, updateGame) {
     }
 
     if (matchCol > 0) {
-      return find3rdVal(
-        val,
-        block,
-        [row, col],
-        [matchRow, matchCol],
-        gameState,
-        updateGame
-      );
+      return find3rdVal(val, block, [row, col], [matchRow, matchCol]);
     }
   }
 };
 
-const find3rdVal = function(
-  val,
-  block,
-  coords1,
-  coords2,
-  gameState,
-  updateGame
-) {
+const find3rdVal = function(val, block, coords1, coords2) {
   console.log("val: ", val);
   console.log("coords1: ", coords1);
   console.log("coords2: ", coords2);
@@ -133,16 +119,14 @@ const find3rdVal = function(
   console.log("pot cols 1", potentialCols);
 
   //filter out any cells that are already filled
-  potentialCols = potentialCols.filter(
-    col => gameState[missingRow][col] === ""
-  );
+  potentialCols = potentialCols.filter(col => game[missingRow][col] === "");
   console.log("pot cols 2", potentialCols);
 
   //filter out any cells that the cols already contain the val
   potentialCols = potentialCols.filter(col => {
     let valFound = 0;
     for (let i = 0; i < 9; i++) {
-      if (gameState[i][col] === val) {
+      if (game[i][col] === val) {
         valFound = 1;
       }
     }
