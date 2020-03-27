@@ -19,14 +19,16 @@ export default function checkCols(row, col, val, game) {
   } else {
     colArr = game.map(row => row.slice(6, 9));
   }
-  console.log("val: ", val, "colArr: ", colArr);
 
-  /* const numOfOccurances = rowArr.reduce((total, currentVal) => {
+  const numOfOccurances = colArr.reduce((total, currentVal) => {
     if (currentVal.includes(val)) {
       return total + 1;
     } else return total;
   }, 0);
 
+  console.log("val: ", val, "num Occur: ", numOfOccurances);
+
+  /*
   if (numOfOccurances === 2) {
     let matchRow = undefined;
     let matchCol = undefined;
