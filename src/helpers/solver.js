@@ -4,8 +4,12 @@ const blockLookup = {
   3: [6, 7, 8]
 };
 
-export default function solver(gameState, updateGame) {
+let game = [];
+
+export default function solver(gameState, updateGameState) {
   let rowUpdated = false;
+  game = gameState;
+  console.log("GAME: ", game);
   rowUpdated = loopRows(gameState, updateGame);
   // while (rowUpdated) {
   //   rowUpdated = loopRows(gameState, updateGame);
@@ -21,6 +25,22 @@ export default function solver(gameState, updateGame) {
   }
   console.log("clear");
 }
+
+const updateGame = function(row, column, value) {
+  console.log("prevGame", game);
+
+  const updatedGame = game.map((subarray, i) => {
+    return subarray.map((el, j) => {
+      if (i === row && j === column) {
+        return Number(value);
+      } else {
+        return el;
+      }
+    });
+  });
+  game = updatedGame;
+  console.log(game);
+};
 
 const loopRows = function(gameState, updateGame) {
   let rowUpdated = false;
