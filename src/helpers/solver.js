@@ -10,6 +10,8 @@ export default function solver(gameState, updateGameState) {
     rowUpdated = loopRows();
   }
 
+  loopColumns();
+
   console.log("END OF SOLVER");
   console.log(GLOBAL_GAME);
 }
@@ -26,6 +28,24 @@ const loopRows = function() {
       }
     }
   }
+  console.log("row updated: ", result);
+  return result;
+};
+
+const loopColumns = function() {
+  let result = false;
+
+  for (let col = 0; col < 9; col++) {
+    for (let row = 0; row < 9; row++) {
+      if (GLOBAL_GAME[row][col] !== "") {
+        // result = checkCols(row, col, val, GLOBAL_GAME) || result; //if rowupdated is ever true it maintains this value
+        // if (result) {
+        //   GLOBAL_GAME = result.updatedGame;
+        // }
+      }
+    }
+  }
+
   console.log("row updated: ", result);
   return result;
 };
