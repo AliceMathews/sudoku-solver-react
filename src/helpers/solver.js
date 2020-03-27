@@ -6,19 +6,7 @@ export default function solver(gameState, updateGameState) {
   GLOBAL_GAME = gameState;
 
   rowUpdated = loopRows();
-  // while (rowUpdated) {
-  //   rowUpdated = loopRows();
-  // }
-  if (rowUpdated) {
-    console.log("check");
-    rowUpdated = loopRows();
-  }
-  if (rowUpdated) {
-    console.log("check");
-    rowUpdated = loopRows();
-  }
-  if (rowUpdated) {
-    console.log("check");
+  while (rowUpdated) {
     rowUpdated = loopRows();
   }
 
@@ -31,7 +19,6 @@ const loopRows = function() {
   for (let [row, arr] of GLOBAL_GAME.entries()) {
     for (let [col, val] of arr.entries()) {
       if (val !== "") {
-        console.log("IN LOOP");
         result = checkRows(row, col, val, GLOBAL_GAME) || result; //if rowupdated is ever true it maintains this value
         if (result) {
           GLOBAL_GAME = result.updatedGame;

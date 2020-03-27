@@ -89,6 +89,6 @@ const find3rdVal = function(val, block, coords1, coords2, game) {
     const missingCol = potentialCols[0];
 
     const updatedGame = updateGame(missingRow, missingCol, val, game);
-    return { updatedGame, updatedRow: true }; //updates the rowUpdated value
+    return { updatedGame }; //updates the rowUpdated value
   }
 };
