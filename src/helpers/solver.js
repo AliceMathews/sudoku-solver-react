@@ -12,18 +12,18 @@ export default function solver(gameState, updateGameState) {
   console.log("GAME: ", game);
   rowUpdated = loopRows();
 
-  // while (rowUpdated) {
-  //   rowUpdated = loopRows(gameState, updateGame);
+  while (rowUpdated) {
+    rowUpdated = loopRows(gameState, updateGame);
+  }
+  // if (rowUpdated) {
+  //   console.log("running again");
+  //   rowUpdated = loopRows();
   // }
-  if (rowUpdated) {
-    console.log("running again");
-    rowUpdated = loopRows();
-  }
 
-  if (rowUpdated) {
-    console.log("running again");
-    rowUpdated = loopRows();
-  }
+  // if (rowUpdated) {
+  //   console.log("running again");
+  //   rowUpdated = loopRows();
+  // }
   console.log("clear");
 }
 
