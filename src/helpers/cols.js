@@ -75,5 +75,6 @@ const find3rdVal = function(val, block, coords1, coords2, game) {
       !blockLookup[key].includes(coords2[0])
   );
 
-  console.log("missing row block: ", missingRowBlock);
+  let potentialRows = blockLookup[missingRowBlock];
+  console.log("potential rows", potentialRows);
 };
