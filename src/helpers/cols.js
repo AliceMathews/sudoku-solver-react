@@ -91,4 +91,12 @@ const find3rdVal = function(val, block, coords1, coords2, game) {
     return undefined;
   });
   console.log("potential rows", potentialRows);
+
+  if (potentialRows.length === 1) {
+    const missingRow = potentialRows[0];
+
+    const updatedGame = updateGame(missingRow, missingCol, val, game);
+    console.log("updated game: ", updatedGame);
+    return { updatedGame };
+  }
 };
