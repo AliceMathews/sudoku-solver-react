@@ -39,15 +39,16 @@ const loopColumns = function() {
   for (let col = 0; col < 9; col++) {
     for (let row = 0; row < 9; row++) {
       if (GLOBAL_GAME[row][col] !== "") {
-        checkCols(row, col, GLOBAL_GAME[row][col], GLOBAL_GAME);
-        // result = checkCols(row, col, val, GLOBAL_GAME) || result; //if rowupdated is ever true it maintains this value
-        // if (result) {
-        //   GLOBAL_GAME = result.updatedGame;
-        // }
+        result =
+          checkCols(row, col, GLOBAL_GAME[row][col], GLOBAL_GAME) || result;
+        //if rowupdated is ever true it maintains this value
+        if (result) {
+          GLOBAL_GAME = result.updatedGame;
+        }
       }
     }
   }
 
-  console.log("row updated: ", result);
+  console.log("col updated: ", result);
   return result;
 };
