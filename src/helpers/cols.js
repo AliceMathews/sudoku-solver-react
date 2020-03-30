@@ -76,5 +76,8 @@ const find3rdVal = function(val, block, coords1, coords2, game) {
   );
 
   let potentialRows = blockLookup[missingRowBlock];
+
+  //filter out any cells that are already filled
+  potentialRows = potentialRows.filter(row => game[row][missingCol] === "");
   console.log("potential rows", potentialRows);
 };
