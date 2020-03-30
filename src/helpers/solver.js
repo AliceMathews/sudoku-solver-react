@@ -8,14 +8,16 @@ export default function solver(gameState, updateGameState) {
   GLOBAL_GAME = gameState;
 
   rowUpdated = loopRows();
-  while (rowUpdated) {
-    rowUpdated = loopRows();
-  }
-
   colUpdated = loopColumns();
-  while (colUpdated) {
+
+  while (rowUpdated || colUpdated) {
+    rowUpdated = loopRows();
     colUpdated = loopColumns();
   }
+
+  // while (colUpdated) {
+  //   colUpdated = loopColumns();
+  // }
 
   console.log("END OF SOLVER");
   console.log(GLOBAL_GAME);
