@@ -26,8 +26,6 @@ export default function checkCols(row, col, val, game) {
     } else return total;
   }, 0);
 
-  console.log("val: ", val, "num Occur: ", numOfOccurances);
-
   if (numOfOccurances === 2) {
     let matchRow = undefined;
     let matchCol = undefined;
@@ -51,7 +49,6 @@ export default function checkCols(row, col, val, game) {
         }
       }
     }
-    console.log("match row: ", matchRow, "match col: ", matchCol);
 
     if (matchCol && matchRow) {
       return find3rdVal(val, block, [row, col], [matchRow, matchCol], game);
@@ -60,11 +57,6 @@ export default function checkCols(row, col, val, game) {
 }
 
 const find3rdVal = function(val, block, coords1, coords2, game) {
-  console.log("val: ", val);
-  console.log("coords1: ", coords1);
-  console.log("coords2: ", coords2);
-  console.log("block: ", block);
-
   const missingCol = blockLookup[block].find(
     el => el !== coords1[1] && el !== coords2[1]
   );
@@ -90,13 +82,12 @@ const find3rdVal = function(val, block, coords1, coords2, game) {
     if (valFound === 0) return String(row); //convert to string to deal with bug where if col is 0, you get an empty array
     return undefined;
   });
-  console.log("potential rows", potentialRows);
 
   if (potentialRows.length === 1) {
     const missingRow = potentialRows[0];
 
     const updatedGame = updateGame(missingRow, missingCol, val, game);
-    console.log("updated game: ", updatedGame);
+
     return { updatedGame };
   }
 };

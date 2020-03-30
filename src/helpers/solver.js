@@ -13,11 +13,10 @@ export default function solver(gameState, updateGameState) {
   while (rowUpdated || colUpdated) {
     rowUpdated = loopRows();
     colUpdated = loopColumns();
+    console.log("row updated: ", rowUpdated);
+    console.log("col updated: ", colUpdated);
+    console.log("-----------------");
   }
-
-  // while (colUpdated) {
-  //   colUpdated = loopColumns();
-  // }
 
   console.log("END OF SOLVER");
   console.log(GLOBAL_GAME);
@@ -44,7 +43,7 @@ const loopRows = function() {
       }
     }
   }
-  console.log("row updated: ", result);
+
   return result;
 };
 
@@ -64,6 +63,5 @@ const loopColumns = function() {
     }
   }
 
-  console.log("col updated: ", result);
   return result;
 };
