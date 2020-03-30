@@ -18,8 +18,19 @@ export default function solver(gameState, updateGameState) {
     console.log("-----------------");
   }
 
-  console.log("END OF SOLVER");
-  console.log(GLOBAL_GAME);
+  let solved = true;
+
+  for (const row of GLOBAL_GAME) {
+    if (row.includes("")) {
+      solved = false;
+    }
+  }
+
+  if (solved) {
+    console.log("SOLVED!!!!");
+  } else {
+    console.log("END OF SOLVER - I'M NOT SMART ENOUGH YET");
+  }
 
   //update state
   for (const [i, row] of GLOBAL_GAME.entries()) {
