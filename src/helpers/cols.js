@@ -64,4 +64,16 @@ const find3rdVal = function(val, block, coords1, coords2, game) {
   console.log("coords1: ", coords1);
   console.log("coords2: ", coords2);
   console.log("block: ", block);
+
+  const missingCol = blockLookup[block].find(
+    el => el !== coords1[1] && el !== coords2[1]
+  );
+
+  const missingRowBlock = Object.keys(blockLookup).find(
+    key =>
+      !blockLookup[key].includes(coords1[0]) &&
+      !blockLookup[key].includes(coords2[0])
+  );
+
+  console.log("missing row block: ", missingRowBlock);
 };
