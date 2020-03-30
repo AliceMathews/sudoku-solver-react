@@ -4,6 +4,7 @@ let GLOBAL_GAME = [];
 
 export default function solver(gameState, updateGameState) {
   let rowUpdated = false;
+  let colUpdated = false;
   GLOBAL_GAME = gameState;
 
   rowUpdated = loopRows();
@@ -11,7 +12,10 @@ export default function solver(gameState, updateGameState) {
     rowUpdated = loopRows();
   }
 
-  loopColumns();
+  colUpdated = loopColumns();
+  while (colUpdated) {
+    colUpdated = loopColumns();
+  }
 
   console.log("END OF SOLVER");
   console.log(GLOBAL_GAME);
