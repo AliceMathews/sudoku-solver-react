@@ -79,5 +79,16 @@ const find3rdVal = function(val, block, coords1, coords2, game) {
 
   //filter out any cells that are already filled
   potentialRows = potentialRows.filter(row => game[row][missingCol] === "");
+
+  potentialRows = potentialRows.filter(row => {
+    let valFound = 0;
+    for (let i = 0; i < 9; i++) {
+      if (game[row][i] === val) {
+        valFound = 1;
+      }
+    }
+    if (valFound === 0) return String(row); //convert to string to deal with bug where if col is 0, you get an empty array
+    return undefined;
+  });
   console.log("potential rows", potentialRows);
 };
