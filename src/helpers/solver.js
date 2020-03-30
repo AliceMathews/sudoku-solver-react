@@ -19,6 +19,15 @@ export default function solver(gameState, updateGameState) {
 
   console.log("END OF SOLVER");
   console.log(GLOBAL_GAME);
+
+  //update state
+  for (const [i, row] of GLOBAL_GAME.entries()) {
+    for (const [j] of row.entries()) {
+      if (GLOBAL_GAME[i][j]) {
+        updateGameState(i, j, GLOBAL_GAME[i][j]);
+      }
+    }
+  }
 }
 
 const loopRows = function() {
