@@ -5,14 +5,19 @@ let GLOBAL_GAME = [];
 export default function solver(gameState, updateGameState) {
   let rowUpdated = false;
   let colUpdated = false;
+  let boxUpdated = false;
+
   GLOBAL_GAME = gameState;
 
   rowUpdated = loopRows();
   colUpdated = loopColumns();
+  boxUpdated = loopBoxes();
 
   while (rowUpdated || colUpdated) {
     rowUpdated = loopRows();
     colUpdated = loopColumns();
+    boxUpdated = loopBoxes();
+
     console.log("row updated: ", rowUpdated);
     console.log("col updated: ", colUpdated);
     console.log("-----------------");
@@ -71,6 +76,27 @@ const loopColumns = function() {
           GLOBAL_GAME = result.updatedGame;
         }
       }
+    }
+  }
+
+  return result;
+};
+
+const loopBoxes = function() {
+  const blockLookup = {
+    1: [0, 1, 2],
+    2: [3, 4, 5],
+    3: [6, 7, 8]
+  };
+
+  let result = false;
+
+  for (const rowBlock of Object.keys(blockLookup)) {
+    for (const colBlock of Object.keys(blockLookup)) {
+      const rows = blockLookup[rowBlock];
+      const cols = blockLookup[colBlock];
+      console.log("rows: ", rows);
+      console.log("cols", cols);
     }
   }
 
