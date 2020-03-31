@@ -20,4 +20,12 @@ export default function checkBoxes(rows, cols, game) {
   console.log(foundVals);
   missingVals = missingVals.filter(val => !foundVals.includes(val));
   console.log(missingVals);
+  findPossibleVals(rows, cols, missingVals, game);
 }
+
+const findPossibleVals = function(rows, cols, missingVals, game) {
+  let boxArr = game.slice(rows[0], rows[2] + 1);
+  boxArr = boxArr.map(row => row.slice(cols[0], cols[2] + 1));
+
+  console.log(boxArr);
+};
