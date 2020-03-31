@@ -19,10 +19,12 @@ export default function checkBoxes(rows, cols, game) {
   for (const row of rows) {
     for (const col of cols) {
       if (game[row][col] === "") {
-        gameUpdated = findPossibleVals(row, col, missingVals, game);
+        let result = false;
+        result = findPossibleVals(row, col, missingVals, game);
 
-        if (gameUpdated) {
-          game = gameUpdated.updatedGame;
+        if (result) {
+          game = result.updatedGame;
+          gameUpdated = { updatedGame: game };
           console.log("GAME ", game);
         }
       }

@@ -97,7 +97,11 @@ const loopBoxes = function() {
     for (const colBlock of Object.keys(blockLookup)) {
       const rows = blockLookup[rowBlock];
       const cols = blockLookup[colBlock];
-      checkBoxes(rows, cols, GLOBAL_GAME);
+      result = checkBoxes(rows, cols, GLOBAL_GAME);
+
+      if (result) {
+        GLOBAL_GAME = result.updatedGame;
+      }
     }
   }
 
