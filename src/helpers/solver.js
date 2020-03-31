@@ -1,5 +1,7 @@
 import checkRows from "./rows";
 import checkCols from "./cols";
+import checkBoxes from "./boxes";
+
 let GLOBAL_GAME = [];
 
 export default function solver(gameState, updateGameState) {
@@ -95,8 +97,7 @@ const loopBoxes = function() {
     for (const colBlock of Object.keys(blockLookup)) {
       const rows = blockLookup[rowBlock];
       const cols = blockLookup[colBlock];
-      console.log("rows: ", rows);
-      console.log("cols", cols);
+      checkBoxes(rows, cols, GLOBAL_GAME);
     }
   }
 
