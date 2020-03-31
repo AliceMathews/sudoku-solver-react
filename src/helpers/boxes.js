@@ -4,6 +4,9 @@ export default function checkBoxes(rows, cols, game) {
   let missingVals = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const foundVals = [];
 
+  let boxArr = game.slice(rows[0], rows[2] + 1);
+  boxArr = boxArr.map(row => row.slice(cols[0], cols[2] + 1));
+
   let gameUpdated = false;
 
   for (const row of rows) {
@@ -20,12 +23,15 @@ export default function checkBoxes(rows, cols, game) {
     for (const col of cols) {
       if (game[row][col] === "") {
         let result = false;
-        result = findPossibleVals(row, col, missingVals, game);
+        const potentialVals = findPossibleVals(row, col, missingVals, game);
 
-        if (result) {
-          game = result.updatedGame;
-          gameUpdated = { updatedGame: game };
-          console.log("GAME ", game);
+        // game2[row][col] = potentialVals;
+
+        if (potentialVals.length === 1) {
+          const updatedGame = updateGame(row, col, potentialVals[0], game);
+          game = updatedGame;
+          console.log("updated game: ", updatedGame);
+          gameUpdated = { updatedGame };
         }
       }
     }
@@ -54,6 +60,9 @@ const findPossibleVals = function(row, col, missingVals, game) {
 
     return undefined;
   });
+
+  console.log("pot vals: ", potentialVals);
+  return potentialVals;
 
   if (potentialVals.length === 1) {
     const updatedGame = updateGame(row, col, potentialVals[0], game);
