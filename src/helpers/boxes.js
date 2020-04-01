@@ -20,10 +20,9 @@ export default function checkBoxes(rows, cols, game) {
 
   missingVals = missingVals.filter(val => !foundVals.includes(val));
 
-  for (const [i, row] of rows.entries()) {
-    for (const [j, col] of cols.entries()) {
+  for (const row of rows) {
+    for (const col of cols) {
       if (game[row][col] === "") {
-        let result = false;
         const potentialVals = findPossibleVals(row, col, missingVals, game);
 
         cellPotentialVals.push({ row, col, potentialVals });
@@ -31,7 +30,6 @@ export default function checkBoxes(rows, cols, game) {
         if (potentialVals.length === 1) {
           const updatedGame = updateGame(row, col, potentialVals[0], game);
           game = updatedGame;
-          // console.log("updated game: ", updatedGame);
           gameUpdated = { updatedGame };
         }
       }
