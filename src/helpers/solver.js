@@ -17,13 +17,14 @@ export default function solver(gameState, updateGameState) {
 
   console.log("-----------------");
 
-  while (rowUpdated || colUpdated) {
+  while (rowUpdated || colUpdated || boxUpdated) {
     rowUpdated = loopRows();
     colUpdated = loopColumns();
     boxUpdated = loopBoxes();
 
     console.log("row updated: ", rowUpdated);
     console.log("col updated: ", colUpdated);
+    console.log("box updated: ", boxUpdated);
     console.log("-----------------");
   }
 
