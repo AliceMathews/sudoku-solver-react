@@ -15,6 +15,8 @@ export default function solver(gameState, updateGameState) {
   colUpdated = loopColumns();
   boxUpdated = loopBoxes();
 
+  console.log("-----------------");
+
   while (rowUpdated || colUpdated) {
     rowUpdated = loopRows();
     colUpdated = loopColumns();

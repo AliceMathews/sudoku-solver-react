@@ -27,22 +27,36 @@ export default function checkBoxes(rows, cols, game) {
         const potentialVals = findPossibleVals(row, col, missingVals, game);
 
         cellPotentialVals.push({ row, col, potentialVals });
-        boxArr[i][j] = potentialVals;
-        console.log("box: ", cellPotentialVals);
-
-        // game2[row][col] = potentialVals;
 
         if (potentialVals.length === 1) {
           const updatedGame = updateGame(row, col, potentialVals[0], game);
           game = updatedGame;
-          console.log("updated game: ", updatedGame);
+          // console.log("updated game: ", updatedGame);
           gameUpdated = { updatedGame };
         }
       }
     }
   }
+  // console.log("cell pot vals: ", cellPotentialVals);
 
-  missingVals.forEach(val => {});
+  //check # of occurances for each missing value. if one then set that value
+  missingVals.forEach(val => {
+    const valOccurances = cellPotentialVals.filter(cell =>
+      cell.potentialVals.includes(val)
+    );
+    if (valOccurances.length === 1) {
+      // console.log("val: ", val, "occurances: ", valOccurances[0]);
+      const updatedGame = updateGame(
+        valOccurances[0].row,
+        valOccurances[0].col,
+        val,
+        game
+      );
+      game = updatedGame;
+      // console.log("updated game: ", updatedGame);
+      gameUpdated = { updatedGame };
+    }
+  });
 
   return gameUpdated;
 }
@@ -50,7 +64,7 @@ export default function checkBoxes(rows, cols, game) {
 const findPossibleVals = function(row, col, missingVals, game) {
   let potentialVals = [...missingVals];
 
-  console.log("row: ", row, "col: ", col, "pot vals", potentialVals);
+  // console.log("row: ", row, "col: ", col, "pot vals", potentialVals);
 
   //filter for value in row
   potentialVals = potentialVals.filter(val => !game[row].includes(val));
@@ -68,7 +82,7 @@ const findPossibleVals = function(row, col, missingVals, game) {
     return undefined;
   });
 
-  console.log("pot vals: ", potentialVals);
+  // console.log("pot vals: ", potentialVals);
   return potentialVals;
 
   if (potentialVals.length === 1) {
