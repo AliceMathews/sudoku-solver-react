@@ -4,8 +4,6 @@ export default function checkBoxes(rows, cols, game) {
   let missingVals = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const foundVals = [];
 
-  let boxArr = game.slice(rows[0], rows[2] + 1);
-  boxArr = boxArr.map(row => row.slice(cols[0], cols[2] + 1));
   const cellPotentialVals = [];
 
   let gameUpdated = false;
@@ -35,7 +33,6 @@ export default function checkBoxes(rows, cols, game) {
       }
     }
   }
-  // console.log("cell pot vals: ", cellPotentialVals);
 
   //check # of occurances for each missing value. if one then set that value
   missingVals.forEach(val => {
@@ -43,7 +40,6 @@ export default function checkBoxes(rows, cols, game) {
       cell.potentialVals.includes(val)
     );
     if (valOccurances.length === 1) {
-      // console.log("val: ", val, "occurances: ", valOccurances[0]);
       const updatedGame = updateGame(
         valOccurances[0].row,
         valOccurances[0].col,
@@ -51,7 +47,7 @@ export default function checkBoxes(rows, cols, game) {
         game
       );
       game = updatedGame;
-      // console.log("updated game: ", updatedGame);
+
       gameUpdated = { updatedGame };
     }
   });
@@ -61,8 +57,6 @@ export default function checkBoxes(rows, cols, game) {
 
 const findPossibleVals = function(row, col, missingVals, game) {
   let potentialVals = [...missingVals];
-
-  // console.log("row: ", row, "col: ", col, "pot vals", potentialVals);
 
   //filter for value in row
   potentialVals = potentialVals.filter(val => !game[row].includes(val));
@@ -80,33 +74,5 @@ const findPossibleVals = function(row, col, missingVals, game) {
     return undefined;
   });
 
-  // console.log("pot vals: ", potentialVals);
   return potentialVals;
-
-  if (potentialVals.length === 1) {
-    const updatedGame = updateGame(row, col, potentialVals[0], game);
-    console.log("updated game: ", updatedGame);
-    return { updatedGame };
-  } else {
-    return false;
-  }
-
-  // console.log("pot vals: ", potentialVals);
-
-  // missingVals.forEach(val => {
-  //   //check rows
-  //   if (game[row].includes(val) || )
-  // });
-  // let boxArr = game.slice(rows[0], rows[2] + 1);
-  // boxArr = boxArr.map(row => row.slice(cols[0], cols[2] + 1));
-
-  // for (const row of boxArr) {
-  //   for (const cell of row) {
-  //     if (cell === "") {
-  //       missingVals.forEach(val => {
-
-  //       })
-  //     }
-  //   }
-  // }
 };
